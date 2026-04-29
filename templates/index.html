@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Smart Rainwater AI</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="badge">AI POWERED</div>
+    <h1 class="title">Smart Rainwater <span>AI System</span></h1>
+    <p class="subtitle">Predict Rainfall. Optimize Storage. Save Water.</p>
+
+    <!-- INPUT PANEL -->
+    <form action="/predict" method="post" class="panel">
+        <div class="field">
+            <label>Start Day</label>
+            <div class="input-wrap blue">
+                <span>📅</span>
+                <input type="date" name="day" required>
+            </div>
+        </div>
+
+        <div class="field">
+            <label>Roof Area</label>
+            <div class="input-wrap green">
+                <span>🏠</span>
+                <input type="number" name="area" placeholder="Enter roof size">
+                <small>m²</small>
+            </div>
+        </div>
+
+        <div class="field">
+            <label>Tank Capacity</label>
+            <div class="input-wrap purple">
+                <span>🛢️</span>
+                <input type="number" name="capacity" required>
+                <small>L</small>
+            </div>
+        </div>
+
+        <div class="field btn-field">
+            <button type="submit">⚡ Analyze</button>
+        </div>
+    </form>
+
+    {% if prediction %}
+
+    <!-- MAIN DASHBOARD -->
+    <div class="dashboard">
+
+        <!-- LEFT CARDS -->
+        <div class="left">
+
+            <div class="card">
+                <h4>🌦️ Total Rainfall</h4>
+                <h2>{{ prediction }} mm</h2>
+            </div>
+
+            <div class="card green-card">
+                <h4>💧 Water Collected</h4>
+                <h2>{{ water }} L</h2>
+            </div>
+
+            <div class="card purple-card">
+                <h4>📊 Tank Usage</h4>
+                <h2>{{ tank }}%</h2>
+            </div>
+
+            <div class="alert">
+                {{ alert }}
+            </div>
+
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="right">
+
+            <div class="chart-box">
+                <canvas id="chart"></canvas>
+            </div>
+
+            <!-- TANK VISUAL -->
+            <div class="tank-box">
+                <div class="tank">
+                    <div class="water" style="height: {{ tank }}%"></div>
+                </div>
+                <h3>{{ tank }}%</h3>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- INSIGHTS -->
+    <div class="insights">
+
+        <div class="insight">
+    {{ alert }}
+    </div>
+
+        <div class="insight">
+            💧 Optimize Water Storage
+        </div>
+
+        <div class="insight">
+            🌱 Eco Friendly Usage
+        </div>
+
+        <div class="insight">
+            ⚠️ Overflow Risk
+        </div>
+
+    </div>
+
+    <!-- CHART SCRIPT -->
+ 
+      <script>
+const data = {{ chart_data | tojson | safe }};
+
+const ctx = document.getElementById('chart').getContext('2d');
+
+const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+gradient.addColorStop(0, 'rgba(0,247,255,0.4)');
+gradient.addColorStop(1, 'rgba(0,247,255,0)');
+
+new Chart(ctx, {
+    data: {
+        labels: ['D1','D2','D3','D4','D5','D6','D7'],
+        datasets: [
+            {
+                type: 'bar',
+                label: 'Rainfall (Bar)',
+                data: data,
+                backgroundColor: 'rgba(0,247,255,0.2)'
+            },
+            {
+                type: 'line',
+                label: 'Rainfall Forecast',
+                data: data,
+                borderColor: '#00f7ff',
+                backgroundColor: gradient,
+                fill: true,
+                tension: 0.5,
+                pointBackgroundColor: '#00f7ff',
+                pointRadius: 5
+            }
+        ]
+    },
+    options: {
+        plugins: {
+            legend: {
+                labels: { color: 'white' }
+            }
+        },
+        scales: {
+            x: {
+                ticks: { color: '#aaa' }
+            },
+            y: {
+                ticks: { color: '#aaa' }
+            }
+        }
+    }
+});
+</script>
+   
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>

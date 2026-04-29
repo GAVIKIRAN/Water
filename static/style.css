@@ -1,0 +1,168 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI';
+    background: radial-gradient(circle at top, #0b1d2c, #02070d);
+    color: white;
+}
+
+/* HEADER */
+.container {
+    text-align: center;
+    padding: 40px;
+}
+
+.badge {
+    background: rgba(0,255,255,0.1);
+    color: #00f7ff;
+    padding: 5px 12px;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+.title span {
+    color: #00f7ff;
+}
+
+.subtitle {
+    color: #aaa;
+}
+
+/* PANEL 
+.panel {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin: 30px auto;
+    background: rgba(255,255,255,0.03);
+    padding: 20px;
+    border-radius: 15px;
+}*/
+.panel {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    align-items: flex-end;   /* 🔥 KEY FIX */
+}
+
+/* INPUT */
+.input-wrap {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.input-wrap input {
+    background: transparent;
+    border: none;
+    color: white;
+}
+
+/* COLORS */
+.blue { border: 1px solid #00c6ff; }
+.green { border: 1px solid #00ff9d; }
+.purple { border: 1px solid #a855f7; }
+
+/* BUTTON */
+button {
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #00f7ff, #8a2be2);
+    border: none;
+    border-radius: 10px;
+    color: white;
+}
+
+/* DASHBOARD */
+.dashboard {
+    display: flex;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+/* LEFT */
+.left {
+    width: 30%;
+}
+
+.card {
+    background: rgba(255,255,255,0.05);
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+
+.green-card { border-left: 4px solid #00ff9d; }
+.purple-card { border-left: 4px solid #a855f7; }
+
+.alert {
+    background: rgba(255,165,0,0.1);
+    padding: 15px;
+    border-radius: 10px;
+}
+
+/* RIGHT */
+.right {
+    width: 70%;
+}
+
+.chart-box {
+    background: rgba(255,255,255,0.05);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* TANK */
+.tank-box {
+    margin-top: 20px;
+}
+
+.tank {
+    width: 100px;
+    height: 200px;
+    border: 2px solid #00f7ff;
+    margin: auto;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.water {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(180deg, #00f7ff, #0088ff);
+    animation: wave 2s infinite linear;
+}
+
+@keyframes wave {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(5px); }
+    100% { transform: translateY(0px); }
+}
+
+/* INSIGHTS */
+.insights {
+    display: flex;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.insight {
+    flex: 1;
+    padding: 15px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+.card, .chart-box, .tank {
+    box-shadow: 0 0 10px rgba(0,247,255,0.2);
+}
